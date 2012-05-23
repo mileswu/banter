@@ -1,3 +1,22 @@
-h1 Welcome
-a(href="/create") Create
+#front-page-splash
+  .left.blurb
+    | Banter! is zero-effort <em>impromptu group chatting</em>. Just create a room and copy the link to all your friends.
+  .left.onlinenow
+    | <strong>#{numclients}</strong> people chatting now
+  .clear
 
+a#create-button(href="/create")
+  | <strong>Create Room</strong>
+  | Options will be configured later.
+
+#front-page-why
+  .left
+    h2 Fast and Easy
+    p Open one shortened URL to access the chat. No account needed.
+  .left
+    h2 Transcripts
+    p Conversations in the room can be logged and stored, even when you are offline, and viewed or exported anytime.
+  .left
+    h2 Privacy
+    p For additional security, passwords can be used to secure access.
+  .clear

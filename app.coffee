@@ -16,7 +16,7 @@ app.configure ->
 
 
 app.get '/', (req, res) ->
-  res.render 'index', title: 'index'
+  res.render 'index', title: 'Banter!', numclients: io.sockets.clients().length
 
 generate_url = (fn) ->
   usable_chars = "0123456789abcdefghijklmnopqrstuvwxyz"
