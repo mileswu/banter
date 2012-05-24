@@ -1,7 +1,7 @@
 .message
   .metadata
-    span.time 11:30
-    span.author delamoo
+    span.time= date.getHours() + ':' + date.getMinutes()
+    span.author= name
   .message-contents
     p= text
   .clear

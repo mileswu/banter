@@ -37,7 +37,11 @@ app.get '/create', (req, res) ->
 
 app.get /^\/([^\/]+)\/?$/, (req, res) ->
   id = req.params[0]
-  res.render 'chat', title: id
+  redis_client.exists ('room_'+id), (err, retval) ->
+    if retval == 0
+      res.redirect '/'
+    else
+      res.render 'chat', title: id
 
 browserify = require 'browserify'
 browserijade = require 'browserijade'
@@ -59,13 +63,15 @@ io.sockets.on 'connection', (socket) ->
     socket.set 'room', r, () ->
     socket.join r
     redis_client.zrevrange ('room_'+r+'_history'), 0, 100, (err, docs) ->
-      socket.emit 'msg', m for m in docs
+      socket.emit 'msg', m for m in docs.reverse()
   
   socket.on 'msg', (m) ->
     socket.get 'room', (err, room) ->
-      redis_client.zadd ('room_'+room+'_history'), new Date().getTime(), m, (err, retval) ->
-      io.sockets.in(room).emit 'msg', m
+      message = JSON.parse m
+      message['date'] = new Date().getTime()
 
+      redis_client.zadd ('room_'+room+'_history'), message['date'], JSON.stringify(message), (err, retval) ->
+      io.sockets.in(room).emit 'msg', JSON.stringify(message)
 
 console.log 'Ready'
 

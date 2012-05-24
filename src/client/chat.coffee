@@ -6,8 +6,13 @@ $(window).ready () ->
   socket.on 'connect', () ->
     roomid = $('title').text()
     socket.emit 'set room', roomid
-  socket.on 'msg', (data) ->
-    $("#chatwindow").append browserijade("message", {text: data})
+  socket.on 'msg', (m) ->
+    message = JSON.parse m
+    $("#chatwindow").append browserijade("message", {
+      text: message['text'],
+      date: new Date(message['date']),
+      name: message['name']
+    })
 
   $('#msginput').focus (e) ->
     $('#msginput').val ''
@@ -17,7 +22,11 @@ $(window).ready () ->
     
 
   $('#msginputform').submit (e) ->
-    socket.emit 'msg', $('#msginput').val()
+    message = {
+      text: $('#msginput').val(),
+      name: 'delamoo'
+    }
+    socket.emit 'msg', JSON.stringify(message)
     $('#msginput').val ''
     return false
 
