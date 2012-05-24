@@ -39,6 +39,19 @@ app.get /^\/([^\/]+)\/?$/, (req, res) ->
   id = req.params[0]
   res.render 'chat', title: id
 
+browserify = require 'browserify'
+browserijade = require 'browserijade'
+bundle = browserify( {
+  mount: '/js/chat.js',
+#  filter: require('uglify-js'),
+  watch: true
+})
+  .require('browserijade')
+  .use(browserijade(__dirname + '/views/client'), [], {debug:true})
+  .addEntry(__dirname + '/src/client/chat.coffee')
+app.use bundle
+
+
 app.listen 8000
 
 io.sockets.on 'connection', (socket) ->

@@ -4,6 +4,7 @@ html {
 
 html, body {
 	margin: 0;
+	height: 100%;
 }
 
 a:link, a:visited {
@@ -25,7 +26,7 @@ a:hover {
 	background: -webkit-gradient(linear, left bottom, left top, from(white), color-stop(0.877, #eeadf8)) hsl(0, 0%, 92%);
 }
 
-#header div, #content {
+#header div {
 	margin-left: auto;
 	margin-right: auto;
 	width: 800px;
@@ -57,7 +58,14 @@ a:hover {
 }
 
 #content {
-	margin-top: 100px;
+	position: absolute;
+	top:  100px;
+	right:  0;
+	bottom:  50px;
+	left: 50px;
+	right: 50px;
+	/*left: 50%;
+	margin-left: -400px;*/
 }
 
 #front-page-splash div {
@@ -125,12 +133,16 @@ a:hover {
 
 #front-page-splash {
 	margin-bottom: 60px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 800px;
 }
 
 #front-page-splash .blurb {
 	width: 350px;
 	color: #626262;
 	font: 180% "Josefin Sans";
+	line-height: 1em;
 }
 
 #front-page-splash .onlinenow {
@@ -158,3 +170,120 @@ a:hover {
 .clear {
 	clear: both;
 }
+
+#chatwindow {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 225px;
+	bottom: 50px;
+	overflow-y: scroll;
+	border: 1px solid #cbcbcb;
+	-moz-box-shadow: 3px 3px 3px #777777;
+	-webkit-box-shadow: 3px 3px 3px #777777;
+	box-shadow: 3px 3px 3px #777777;
+	background-color: hsl(291, 83%, 97%);
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-size: 80%;
+}
+
+#sidebar {
+	position: absolute;
+	right: 0;
+	width: 200px;
+}
+
+#sidebar {
+	color: #626262;
+	font-size: 80%;
+}
+
+#sidebar h2 {
+	font-size: 125%;
+	color:  black;
+	display: block;
+	padding-bottom:10px;
+}
+
+#sidebar h2:hover {
+	background-color: #fdfdd3;
+}
+
+#sidebar h3 {
+	font-size: 100%;
+	color:  black;	
+	margin-bottom: 0px;
+}
+
+#sidebar ul {
+	margin-top: 7px;
+	list-style: none;
+	padding-left: 15px;
+}
+
+.message {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.message .message-contents {
+	width: 100%;
+	margin-left: -125px;
+	float: right;
+}
+.message .message-contents p {
+	margin-left: 125px;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-right: 0;
+}
+
+.message .metadata {
+	float: left;
+	width: 125px;
+	color: #626262;
+}
+
+.message .author {
+	text-align: right;
+	font-weight: bold;
+}
+.message .metadata:after {
+	content: ":";
+}
+
+.message .time {
+	padding-right: 10px;
+	font-size: 75%;
+}
+
+.author2 {
+	background-color: hsl(291, 83%, 94%);
+}
+
+
+.hidden {
+	display: none;
+}
+
+#msginputdiv {
+	position: absolute;
+	bottom: 0;
+	left:  0px;
+	right: 225px;
+	height: 20px;
+}
+#msginputdiv input {
+	height: 20px;
+	width: 100%;
+	font-size: 80%;
+}
+
+#msginputdiv.placeholderentry input {
+	color: #9c9c9c;
+}
+
+
