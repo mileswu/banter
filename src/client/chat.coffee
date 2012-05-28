@@ -1,7 +1,7 @@
 browserijade = require 'browserijade'
 
 $(window).ready () ->
-  socket = io.connect 'http://ryou.w00.eu:8000'
+  socket = io.connect socketiourl
 
   socket.on 'connect', () ->
     roomid = $('title').text()

@@ -43,6 +43,9 @@ app.get /^\/([^\/]+)\/?$/, (req, res) ->
     else
       res.render 'chat', title: id
 
+port = parseInt(process.argv[2]) || 8000
+socketiourl = 'http://ryou.w00.eu:' + port
+
 browserify = require 'browserify'
 browserijade = require 'browserijade'
 bundle = browserify( {
@@ -52,11 +55,11 @@ bundle = browserify( {
 })
   .require('browserijade')
   .use(browserijade(__dirname + '/views/client'), [], {debug:true})
+  .append("var socketiourl = '" + socketiourl + "';")
   .addEntry(__dirname + '/src/client/chat.coffee')
 app.use bundle
 
-
-app.listen 8000
+app.listen port
 
 io.sockets.on 'connection', (socket) ->
   socket.on 'set room', (r) ->
